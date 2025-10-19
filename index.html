@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>awritterblog - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 font-serif">
+    <!-- Header -->
+    <header class="bg-white shadow fixed top-0 w-full z-10">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
+      >
+        <a href="index.html"
+          ><h1 class="text-2xl font-bold text-gray-900">awritterblog</h1></a
+        >
+        <nav class="flex space-x-4">
+          <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900">Categories</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="mt-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center">
+          <h2 class="text-4xl font-bold text-gray-900">
+            Welcome to awritterblog
+          </h2>
+          <p class="mt-4 text-lg text-gray-600">
+            Discover stories, ideas, and insights from passionate writers.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Posts Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h3 class="text-2xl font-bold text-gray-900 mb-6">Featured Posts</h3>
+      <div
+        id="featured-posts"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- Featured posts will be dynamically inserted here -->
+      </div>
+    </section>
+
+    <!-- Recent Posts Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white">
+      <h3 class="text-2xl font-bold text-gray-900 mb-6">Recent Posts</h3>
+      <div
+        id="recent-posts"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- Recent posts will be dynamically inserted here -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p>&copy; 2025 awritterblog. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Sample blog post data
+      const posts = [
+        {
+          title: "Accessories That Speak Louder Than Words",
+          excerpt:
+            "DealByEthan.shop curates expressive men’s accessories that do more than complete an outfit—they amplify identity, mood, and confidence. This collection is designed for men who dress with intention, emotion, and individuality. Whether you’re layering for impact or adding subtle flair, each piece is chosen to help you express who you are and how you feel.",
+          author: "Kabir",
+          date: "October 19, 2025",
+          image: "https://i.ibb.co.com/39sK7v6s/curated-fashion-essentials-for-bold-styling.jpg",
+          link: "/curated-fashion-essentials-for-bold-styling.html",
+          isFeatured: true,
+        },
+      ];
+
+      // Function to render posts
+      function renderPosts() {
+        const featuredContainer = document.getElementById("featured-posts");
+        const recentContainer = document.getElementById("recent-posts");
+
+        // Clear containers
+        featuredContainer.innerHTML = "";
+        recentContainer.innerHTML = "";
+
+        // Render featured posts
+        posts
+          .filter((post) => post.isFeatured)
+          .forEach((post) => {
+            const postElement = document.createElement("div");
+            postElement.className =
+              "bg-white rounded-lg shadow overflow-hidden";
+            postElement.innerHTML = `
+                    <img src="${post.image}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-xl font-semibold text-gray-900"><a href="${post.link}" class="hover:text-blue-600">${post.title}</a></h4>
+                        <p class="text-gray-600 mt-2">${post.excerpt}</p>
+                        <p class="text-sm text-gray-500 mt-4">By ${post.author} | ${post.date}</p>
+                    </div>
+                `;
+            featuredContainer.appendChild(postElement);
+          });
+
+        // Render recent posts
+        posts
+          .filter((post) => !post.isFeatured)
+          .forEach((post) => {
+            const postElement = document.createElement("div");
+            postElement.className =
+              "bg-gray-50 rounded-lg shadow overflow-hidden";
+            postElement.innerHTML = `
+                    <img src="${post.image}"  class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h4 class="text-lg font-semibold text-gray-900"><a href=${post.link}" class="hover:text-blue-600">${post.title}</a></h4>
+                        <p class="text-gray-600 mt-2 text-sm">${post.excerpt}</p>
+                        <p class="text-sm text-gray-500 mt-3">By ${post.author} | ${post.date}</p>
+                    </div>
+                `;
+            recentContainer.appendChild(postElement);
+          });
+      }
+
+      // Initialize rendering
+      document.addEventListener("DOMContentLoaded", renderPosts);
+    </script>
+  </body>
+</html>
